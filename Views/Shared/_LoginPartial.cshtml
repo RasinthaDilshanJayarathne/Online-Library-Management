@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .custom-navbar {
+            background-color: #002366; /* Navy blue background */
+            padding: 5px;
+        }
+
+            .custom-navbar .nav-link {
+                color: white !important;
+                margin-right: 15px;
+            }
+
+                .custom-navbar .nav-link:hover,
+                .custom-navbar .nav-link:active,
+                .custom-navbar .nav-link:focus {
+                    color: #b3d1ff !important; /* Light blue on hover, active, and focus */
+                }
+
+            .custom-navbar .navbar-right {
+                float: right;
+            }
+
+            .custom-navbar ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .custom-navbar li {
+                display: inline;
+            }
+    </style>
+</head>
+<body>
+    <nav class="custom-navbar">
+        @if (Context.User.Identity.Name != null)
+        {
+            <form asp-controller="Account" asp-action="LogOut" method="post" id="logoutForm" class="navbar-form navbar-right">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-link">
+                        Hello @Context.User.Identity.Name!
+                    </li>
+                    <li>
+                        <a class="nav-link" asp-controller="Reservations" asp-action="Index">RESERVATIONS</a>
+                    </li>
+                    <li>
+                        <button type="submit" class="btn nav-link navbar-btn">LOGOUT</button>
+                    </li>
+                </ul>
+            </form>
+        }
+        else
+        {
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="nav-link" asp-controller="Account" asp-action="Registration">REGISTER</a></li>
+                <li><a class="nav-link" asp-controller="Account" asp-action="Login">LOGIN</a></li>
+            </ul>
+        }
+    </nav>
+</body>
+</html>

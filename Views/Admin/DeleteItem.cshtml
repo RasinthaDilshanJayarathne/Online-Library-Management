@@ -1,0 +1,95 @@
+﻿@model LibraryManagementSystem.Models.Item
+
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    ViewData["Title"] = "Delete Item";
+}
+
+<h2>Delete Item</h2>
+
+<h3>Are you sure you want to delete this item?</h3>
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-8">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.AuthorArtist)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.AuthorArtist)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Type)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Type)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Publisher)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Publisher)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.YearPublished)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.YearPublished)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Language)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Language)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Cost)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Cost)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.ActualStock)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.ActualStock)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Available)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Available)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+                @* <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.ImageUrl)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.ImageUrl)
+                </dd> *@
+            </dl>
+        </div>
+        <div class="col-md-4">
+            <img src="~/images/@Html.DisplayFor(model => model.ImageUrl)" alt="Item Image" class="img-fluid" style="max-height: 380px; width: auto;" />
+        </div>
+    </div>
+
+    <form method="post" asp-action="DeleteItem">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="ItemId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>

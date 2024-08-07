@@ -1,0 +1,182 @@
+﻿@model IEnumerable<LibraryManagementSystem.Models.Item>
+
+@{
+    ViewData["Title"] = "View Items";
+    var isAuthenticated = User.Identity.IsAuthenticated;
+    string userId = "";
+    string username = "";
+
+    if (isAuthenticated)
+    {
+        var user = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+        userId = user != null ? user.Value : "";
+        username = User.Identity.Name; // Assuming the username is stored in the Name claim
+        <script>
+            console.log("username" + username);
+        </script>
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <style>
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding-bottom: 55px;
+            box-sizing: border-box;
+        }
+
+        .search-bar {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        .book-list {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .book-row {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 10px;
+            padding: 10px;
+            align-items: flex-start;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            .book-row:hover {
+                background-color: #d9edf7;
+            }
+
+            .book-row:nth-child(odd) {
+                background-color: #e6f0ff;
+                border: 1px solid #80b3ff;
+            }
+
+            .book-row:nth-child(even) {
+                background-color: #ffffff;
+                border: 1px solid #ddd;
+            }
+
+        .book-details {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+            .book-details p {
+                margin: 5px 0;
+            }
+
+        .book-image {
+            flex: 0 0 auto;
+            width: 150px;
+        }
+
+            .book-image img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+            }
+
+        .book-title {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .book-genre,
+        .book-cost {
+            font-weight: bold;
+        }
+
+        .book-description {
+            font-style: italic;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-height: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Item Inventory List</h1>
+    <div class="search-bar">
+        <label for="search">Search:</label>
+        <input type="text" id="search" name="search" onkeyup="filterBooks()">
+    </div>
+    <div>
+        <label for="entries">Show</label>
+        <select id="entries" name="entries" onchange="filterBooks()">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+        <label for="entries">entries</label>
+    </div>
+    <div id="book-container" class="book-list">
+        @foreach (var item in Model)
+        {
+            <div class="book-row" onclick="showBookDetails('@item.ItemId', '@item.Title', '@item.ImageUrl')">
+                <div class="book-details">
+                    <p class="book-id"><strong>ID: B00-@item.ItemId</strong></p>
+                    <p class="book-title">@item.Title</p>
+                    <p class="book-author"><strong>Author/Artist - </strong>@item.AuthorArtist | <strong>Type - </strong>@item.Type</p>
+                    <p class="book-language"><strong>Publisher - </strong>@item.Publisher | <strong>Year Published - </strong>@item.YearPublished | <strong>Language - </strong>@item.Language</p>
+                    <p class="book-cost"><strong>Cost - </strong>@item.Cost | <strong>Actual Stock - </strong>@item.ActualStock | <strong>Available - </strong>@item.Available</p>
+                    <p class="book-description"><strong>Description - </strong>@item.Description</p>
+                </div>
+                <div class="book-image">
+                    <img src="@Url.Content("~/images/" + item.ImageUrl)" alt="">
+                </div>
+            </div>
+        }
+    </div>
+
+    <script>
+        function filterBooks() {
+            var searchInput = document.getElementById('search').value.toLowerCase();
+            var entries = parseInt(document.getElementById('entries').value);
+            var bookRows = document.querySelectorAll('.book-row');
+            var visibleCount = 0;
+
+            bookRows.forEach(function (row) {
+                var title = row.querySelector('.book-title').textContent.toLowerCase();
+                var author = row.querySelector('.book-author').textContent.toLowerCase();
+
+                if (title.includes(searchInput) || author.includes(searchInput)) {
+                    if (visibleCount < entries) {
+                        row.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function showBookDetails(itemId, title, imageUrl) {
+            const username = '@username';
+            window.location.href = `/Reservations/Create?itemId=${itemId}&title=${encodeURIComponent(title)}&username=${encodeURIComponent(username)}&imageUrl=${encodeURIComponent(imageUrl)}`;
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿@model AdminDashboardViewModel
+
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h2 style="margin-top: 15px;">@ViewData["Title"]</h2>
+<p>Welcome, @ViewBag.Name!</p>
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Total Books Card -->
+        <div class="col-md-4 mb-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Books</h5>
+                    <p class="card-text">@Model.TotalBooks</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total CDs Card -->
+        <div class="col-md-4 mb-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total CDs</h5>
+                    <p class="card-text">@Model.TotalCDs</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Guest Users Card -->
+        <div class="col-md-4 mb-3">
+            <div class="card bg-secondary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Guest Users</h5>
+                    <p class="card-text">@Model.TotalGuestUsers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

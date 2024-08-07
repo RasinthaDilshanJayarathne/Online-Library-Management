@@ -1,0 +1,43 @@
+﻿@model IEnumerable<LibraryManagement.Models.ReservationViewModel>
+
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    ViewData["Title"] = "Pending Reservations";
+}
+
+<h2 class="mt-4 mb-4">Pending Reservations</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Reservation Id</th>
+            <th>User Name</th>
+            <th>Item Title</th>
+            <th>Reservation Date</th>
+            <th>Status</th>
+            <th>Message</th>
+            <th>Actions</th> <!-- Add an Actions column -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <td>@reservation.ReservationId</td>
+                <td>@reservation.UserName</td>
+                <td>@reservation.ItemTitle</td>
+                <td>@reservation.Reservation_Date.ToString("yyyy-MM-dd")</td>
+                <td>@reservation.Status</td>
+                <td>@reservation.Message</td>
+                <td>
+                    <a href="@Url.Action("Edit", new { id = reservation.ReservationId })" class="btn btn-primary">Edit Status</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p>No pending reservations found.</p>
+}

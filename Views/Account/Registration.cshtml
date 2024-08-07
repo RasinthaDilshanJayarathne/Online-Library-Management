@@ -1,0 +1,96 @@
+﻿@model RegisterViewModel
+
+@{
+    ViewData["Title"] = "Registration";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm p-4">
+                <h1 class="mb-4 text-center">Registration</h1>
+                <form asp-action="Registration" method="post" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    @if (ViewBag.Message != null)
+                    {
+                        <div class="alert alert-success">@ViewBag.Message</div>
+                    }
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6 form-floating">
+                            <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                            <label asp-for="FirstName">
+                                <i class="fas fa-user"></i> First Name
+                            </label>
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 form-floating">
+                            <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                            <label asp-for="LastName">
+                                <i class="fas fa-user"></i> Last Name
+                            </label>
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6 form-floating">
+                            <input asp-for="UserName" class="form-control" placeholder="Username" />
+                            <label asp-for="UserName">
+                                <i class="fas fa-user-circle"></i> Username
+                            </label>
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 form-floating">
+                            <input asp-for="Contact_No" class="form-control" placeholder="Contact Number" />
+                            <label asp-for="Contact_No">
+                                <i class="fas fa-phone"></i> Contact Number
+                            </label>
+                            <span asp-validation-for="Contact_No" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6 form-floating">
+                            <input asp-for="Email" class="form-control" placeholder="Email" />
+                            <label asp-for="Email">
+                                <i class="fas fa-envelope"></i> Email
+                            </label>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 form-floating">
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Password" />
+                            <label asp-for="Password">
+                                <i class="fas fa-lock"></i> Password
+                            </label>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6 form-floating">
+                            <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm Password" />
+                            <label asp-for="ConfirmPassword">
+                                <i class="fas fa-lock"></i> Confirm Password
+                            </label>
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-user-plus"></i> Register
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="text-center mt-3">
+                Already have an account? <a asp-action="Login">Go To Login</a>
+            </div>
+        </div>
+    </div>
+</div>

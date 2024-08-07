@@ -1,0 +1,87 @@
+﻿@model IEnumerable<LibraryManagementSystem.Models.Item>
+
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    ViewData["Title"] = "View All Items";
+}
+
+<h2 style="margin-top:20px;">View All Items</h2>
+
+<table class="table table-hover table-responsive">
+    <thead class="thead-dark">
+        <tr>
+            <th>Title</th>
+            <th>Author/Artist</th>
+            <th>Type</th>
+            <th>Publisher</th>
+            <th>Year Published</th>
+            <th>Language</th>
+            <th>Cost</th>
+            <th>Actual Stock</th>
+            <th>Available</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.AuthorArtist</td>
+                <td>@item.Type</td>
+                <td>@item.Publisher</td>
+                <td>@item.YearPublished</td>
+                <td>@item.Language</td>
+                <td>@item.Cost</td>
+                <td>@item.ActualStock</td>
+                <td>@item.Available</td>
+                <td>@item.Description</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        <img src="@Url.Content("~/images/" + item.ImageUrl)" alt="@item.Title" class="img-thumbnail" style="max-width: 100px; max-height: 100px;">
+                    }
+                    else
+                    {
+                        <span>No image</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="EditItem" asp-route-id="@item.ItemId">
+                        <img src="~/images/edit.png" alt="Edit" style="width: 45px; height: 45px; margin-left: 5px;">
+                    </a>
+                    <a asp-action="DeleteItem" asp-route-id="@item.ItemId">
+                        <img src="~/images/delete.jpg" alt="Delete" style="width: 45px; height: 45px; margin-left: 5px;">
+                    </a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    table.table {
+        border-collapse: separate;
+        border-spacing: 0 0.5em;
+    }
+
+        table.table thead th {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        table.table tbody tr {
+            background-color: #f8f9fa;
+        }
+
+            table.table tbody tr:hover {
+                background-color: #e9ecef;
+            }
+
+    .btn-sm {
+        margin: 0 2px;
+    }
+</style>

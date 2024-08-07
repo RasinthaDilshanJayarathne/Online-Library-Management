@@ -1,0 +1,232 @@
+﻿@* @{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Welcome to Sydenham Library</h1>
+<p>Your one-stop destination for books and CDs</p>
+
+<a href="/Account/Login">Admin Sign In</a>
+<a href="/Guest/Search">Search Books/CDs</a>
+<a href="/Guest/LeaveMessage">Leave a Message</a> *@
+
+@{
+    ViewData["Title"] = "Home Page";
+    var successMessage = TempData["SuccessMessage"] as string;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - Sydenham Library</title>
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        .header {
+            background-color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+            .header img {
+                width: 150px;
+            }
+
+        .main-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .features-section, .modernize-section, .process-section {
+            margin: 40px 0;
+        }
+
+            .features-section h2, .process-section h2 {
+                font-size: 32px;
+                margin-bottom: 20px;
+            }
+
+        .features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            width: 30%;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+            .feature:hover {
+                transform: translateY(-10px);
+            }
+
+            .feature img {
+                width: 100px;
+                height: 100px;
+            }
+
+            .feature h3 {
+                font-size: 24px;
+                margin-top: 10px;
+            }
+
+            .feature p {
+                font-size: 16px;
+                color: #666;
+            }
+
+        .modernize-section {
+            position: relative;
+            color: white;
+            padding: 50px 20px;
+            background: url('~/images/LibraryManagementSystem-Background.jpg') no-repeat center center/cover;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+            .modernize-section h1 {
+                font-size: 36px;
+                position: relative;
+                z-index: 1;
+                margin: 0;
+                padding: 0;
+            }
+
+        .process {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            width: 30%;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+            .process-step:hover {
+                transform: translateY(-10px);
+            }
+
+            .process-step img {
+                width: 130px;
+                height: 100px;
+            }
+
+            .process-step h3 {
+                font-size: 24px;
+                margin-top: 10px;
+            }
+
+        .newsletter {
+            background-color: #001a4d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin: 40px 0;
+            border-radius: 10px;
+        }
+
+            .newsletter input {
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                margin-right: 10px;
+                width: 250px;
+                max-width: 80%;
+            }
+
+            .newsletter button {
+                padding: 10px 20px;
+                border: none;
+                background-color: white;
+                color: #6c63ff;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+    </style>
+</head>
+<body>
+    @if (!string.IsNullOrEmpty(successMessage))
+    {
+        <script>
+            alert("@successMessage");
+        </script>
+    }
+
+    <div class="main-container">
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2>Our Features</h2>
+            <p>Our 3 Primary Features</p>
+            <div class="features">
+                <div class="feature">
+                    <img src="~/images/1.png" alt="Digital Book Inventory">
+                    <h3>Digital Book Inventory</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit.</p>
+                </div>
+                <div class="feature">
+                    <img src="~/images/2.jpg" alt="Search Books">
+                    <h3>Search Books</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit.</p>
+                </div>
+                <div class="feature">
+                    <img src="~/images/3.png" alt="Defaulter List">
+                    <h3>Defaulter List</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="process-section">
+            <h2>Our Process</h2>
+            <p>We have a Simple 3 Step Process</p>
+            <div class="process">
+                <div class="process-step">
+                    <img src="~/images/4.jpg" alt="Sign Up">
+                    <h3>Sign Up</h3>
+                </div>
+                <div class="process-step">
+                    <img src="~/images/2.jpg" alt="Search Books">
+                    <h3>Search Books</h3>
+                </div>
+                <div class="process-step">
+                    <img src="~/images/5.png" alt="Visit Us">
+                    <h3>Visit Us</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <h2>Subscribe to our newsletter</h2>
+            <input type="email" placeholder="Enter your email">
+            <button>Subscribe</button>
+        </section>
+    </div>
+</body>
+</html>
+

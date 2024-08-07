@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Sydenham Library </title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication2.styles.css" asp-append-version="true" />
+
+    <style>
+        .custom-navbar {
+            background-color: #001a4d; /* Dark blue color */
+            color: white;
+        }
+
+            .custom-navbar .nav-link {
+                color: white !important;
+            }
+
+            .custom-navbar .nav-item:hover .nav-link {
+                color: #b3d1ff !important; /* Light blue on hover */
+            }
+
+        .top-bar {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+            .top-bar .top-bar-content {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+                .top-bar .top-bar-content .brand-logo img {
+                    height: 70px; /* Adjust as needed */
+                    width: 120px;
+                }
+
+                .top-bar .top-bar-content .top-bar-icons img {
+                    height: 70px;
+                    margin: 0 10px;
+                }
+
+                .top-bar .top-bar-content .contact-info {
+                    display: flex;
+                    align-items: center;
+                    color: #333;
+                }
+
+                    .top-bar .top-bar-content .contact-info a {
+                        color: #333 !important;
+                        text-decoration: none;
+                        margin-left: 20px;
+                    }
+
+                        .top-bar .top-bar-content .contact-info a:hover {
+                            color: #ffff !important; /* Dark blue on hover */
+                            background-color: #001a4d;
+                        }
+
+        .company-name {
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+        }
+
+        .hero-section {
+            background-image: url('path_to_hero_image'); /* Add your hero image path */
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            color: white;
+            text-align: center;
+        }
+
+            .hero-section h1 {
+                font-size: 3rem;
+                margin-bottom: 20px;
+            }
+
+            .hero-section p {
+                font-size: 1.25rem;
+            }
+
+        .section {
+            padding: 60px 0;
+        }
+
+            .section h2 {
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+            }
+
+            .section p {
+                font-size: 1.25rem;
+            }
+
+        .features-section {
+            background-color: #f8f9fa;
+        }
+
+            .features-section .feature {
+                text-align: center;
+            }
+
+                .features-section .feature img {
+                    height: 100px;
+                    margin-bottom: 20px;
+                }
+
+        .contact-section {
+            background-color: #001a4d;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="container top-bar-content">
+                <div class="brand-logo">
+                    <img src="~/images/logo.png" alt="Library Logo" />
+                </div>
+                <h4 class="company-name">Sydenham Library</h4>
+                <div class="top-bar-icons">
+                    <img src="~/images/logo_1.png" alt="Government Logo" />
+                    <img src="~/images/logo_2.png" alt="GeM Logo" />
+                    <img src="~/images/logo_3.png" alt="GeM Logo" />
+                </div>
+                <div class="contact-info">
+                    <span>+91-9350679141</span>
+                    <a href="path_to_brochure.pdf" class="btn btn-outline-dark ms-3">CONTACT US</a>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light custom-navbar border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="AllItems">ALL ITEMS</a>
+                        </li>
+                    </ul>
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted text-center">
+        <div class="container">
+            <p>Read-Write &copy; 2024 - Sydenham Library</p>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

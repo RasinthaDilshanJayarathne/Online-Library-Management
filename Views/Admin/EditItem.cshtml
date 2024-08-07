@@ -1,0 +1,188 @@
+﻿@model LibraryManagementSystem.Models.Item
+
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    ViewData["Title"] = "Edit Item";
+}
+
+<h2 class="mt-4 mb-4">Edit Item</h2>
+
+<form method="post" asp-action="EditItem" enctype="multipart/form-data" class="needs-validation" novalidate>
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="ItemId" />
+    <input type="hidden" asp-for="ImageUrl" />
+
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <div class="form-group">
+                <img id="imagePreview" src="@Url.Content("~/images/" + Model.ImageUrl)" alt="Image Preview" class="img-thumbnail mb-2" style="width: 100%; height: auto;" />
+                <input type="file" asp-for="ImageFile" class="form-control-file" accept="image/*" onchange="previewImage(event)" />
+               @*  <input type="text" class="form-control mt-2" value="@Model.ImageUrl" readonly /> *@
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="row">
+                @* Title Field *@
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" required />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter a title.
+                        </div>
+                    </div>
+                </div>
+
+                @* Author_Artist Field *@
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="AuthorArtist" class="control-label"></label>
+                        <input asp-for="AuthorArtist" class="form-control" required />
+                        <span asp-validation-for="AuthorArtist" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter the author or artist.
+                        </div>
+                    </div>
+                </div>
+
+                @* Type Field *@
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="Type" class="control-label"></label>
+                        <select asp-for="Type" class="form-control" required>
+                            <option value="Book">Book</option>
+                            <option value="CD">CD</option>
+                        </select>
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please select a type.
+                        </div>
+                    </div>
+                </div>
+
+                @* Publisher Field *@
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="Publisher" class="control-label"></label>
+                        <input asp-for="Publisher" class="form-control" required />
+                        <span asp-validation-for="Publisher" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter the publisher.
+                        </div>
+                    </div>
+                </div>
+
+                @* Year_Published Field *@
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="YearPublished" class="control-label"></label>
+                        <input asp-for="YearPublished" class="form-control" required />
+                        <span asp-validation-for="YearPublished" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter the year published.
+                        </div>
+                    </div>
+                </div>
+
+                @* Language Field *@
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="Language" class="control-label"></label>
+                        <input asp-for="Language" class="form-control" required />
+                        <span asp-validation-for="Language" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter the language.
+                        </div>
+                    </div>
+                </div>
+
+                @* Cost Field *@
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="Cost" class="control-label"></label>
+                        <input asp-for="Cost" class="form-control" required />
+                        <span asp-validation-for="Cost" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter the cost.
+                        </div>
+                    </div>
+                </div>
+
+                @* Actual_Stock Field *@
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="ActualStock" class="control-label"></label>
+                        <input asp-for="ActualStock" class="form-control" required />
+                        <span asp-validation-for="ActualStock" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter the actual stock.
+                        </div>
+                    </div>
+                </div>
+
+                @* Available Field *@
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="Available" class="control-label"></label>
+                        <input asp-for="Available" class="form-control" required />
+                        <span asp-validation-for="Available" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter the available stock.
+                        </div>
+                    </div>
+                </div>
+
+                @* Description Field *@
+                <div class="col-md-12 mb-3">
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <textarea asp-for="Description" class="form-control" required></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter a description.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update" class="btn btn-primary btn-block" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        // Bootstrap custom validation
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+}

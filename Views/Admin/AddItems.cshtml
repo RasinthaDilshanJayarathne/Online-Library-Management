@@ -1,0 +1,170 @@
+﻿@model LibraryManagementSystem.Models.Item
+
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    ViewData["Title"] = "Add Item";
+}
+
+<h2 class="mt-4 mb-4">Add a New Item</h2>
+
+<form method="post" asp-controller="Admin" enctype="multipart/form-data" class="needs-validation" novalidate>
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <div class="form-group">
+                <img id="imagePreview" src="#" alt="Image Preview" class="img-thumbnail mb-2" style="display: none; width: 100%; height: auto;" />
+                <input type="file" asp-for="ImageFile" class="form-control-file" accept="image/*" onchange="previewImage(event)" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                <div class="invalid-feedback">
+                    Please upload an image.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" required />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter a title.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="AuthorArtist" class="control-label"></label>
+                        <input asp-for="AuthorArtist" class="form-control" required />
+                        <span asp-validation-for="AuthorArtist" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter the author or artist name.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="Type" class="control-label"></label>
+                        <select asp-for="Type" class="form-control" required>
+                            <option value="Book">Book</option>
+                            <option value="CD">CD</option>
+                        </select>
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please select the type.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="Publisher" class="control-label"></label>
+                        <input asp-for="Publisher" class="form-control" required />
+                        <span asp-validation-for="Publisher" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter the publisher name.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="YearPublished" class="control-label"></label>
+                        <input asp-for="YearPublished" class="form-control" required />
+                        <span asp-validation-for="YearPublished" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter the year of publication.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="Language" class="control-label"></label>
+                        <input asp-for="Language" class="form-control" required />
+                        <span asp-validation-for="Language" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter the language.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="Cost" class="control-label"></label>
+                        <input asp-for="Cost" class="form-control" required />
+                        <span asp-validation-for="Cost" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter the cost.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="ActualStock" class="control-label"></label>
+                        <input asp-for="ActualStock" class="form-control" required />
+                        <span asp-validation-for="ActualStock" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter the actual stock.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                        <label asp-for="Available" class="control-label"></label>
+                        <input asp-for="Available" class="form-control" required />
+                        <span asp-validation-for="Available" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter the available stock.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <textarea asp-for="Description" class="form-control" required></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                        <div class="invalid-feedback">
+                            Please enter a description.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary btn-block" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        (function () {
+            'use strict';
+
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+}
