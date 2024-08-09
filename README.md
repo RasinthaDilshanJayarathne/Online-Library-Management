@@ -26,6 +26,7 @@
 <br>
 <b>Development Tools:</b> SQL Developer, SQL Server Data Tools
 
-<h3>Home Page </h3>
-![Home_Page](https://github.com/user-attachments/assets/b0fff7ba-6da8-464a-aa70-4330271c2199)
-![Home_Page_AllItems](https://github.com/user-attachments/assets/f1a4b381-0ddd-4004-9781-e7ef214efa1c)
+Home Page
+
+![Screenshot (124)](https://github.com/RasinthaDilshanJayarathne/Election_Voting_System/assets/87766409/ce666d84-a8c9-4a62-9d78-3f9be957a730)
+
