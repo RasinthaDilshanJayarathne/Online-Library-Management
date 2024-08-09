@@ -6,7 +6,7 @@
 <h4> Admin: </h4>
 <b>Sign In:</b> Secure access to admin functionalities.
 <br>
-Manage Books/CDs:</b> Add, edit, delete, and view details of books and CDs.
+<b>Manage Books/CDs:</b> Add, edit, delete, and view details of books and CDs.
 <br>
 <b>Issue/Return Books:</b> Handle the issuing and returning of books.
 <br>
